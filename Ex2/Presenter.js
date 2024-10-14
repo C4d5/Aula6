@@ -3,28 +3,30 @@ class TaskPresenter {
         this.view = view;
         this.model = model;
 
-        
+        this.view.onAddTask(this.addTask.bind(this));
+        this.view.onRemoveTask(this.removeTask.bind(this));
+        this.view.onToggleTask(this.toggleTask.bind(this));
         this.updateView();
     }
 
     addTask(description) {
-        this.model.addTask(description);
+        if (description) {
+            this.model.addTask(description);
+            this.updateView();
+        }
+    }
+
+    removeTask(taskId) {
+        this.model.removeTask(taskId);
         this.updateView();
     }
 
-    removeTask(index) {
-        this.model.removeTask(index);
-        this.updateView();
-    }
-
-    toggleTask(index) {
-        this.model.toggleTask(index);
+    toggleTask(taskId) {
+        this.model.toggleTask(taskId);
         this.updateView();
     }
 
     updateView() {
-        this.view.showTasks(this.model.getTasks());
+        this.view.displayTasks(this.model.getTasks());
     }
 }
-
-export default TaskPresenter;
