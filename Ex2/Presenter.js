@@ -1,30 +1,30 @@
 class TaskPresenter {
-    private TaskView view;
-    private TaskModel model;
-
-    public TaskPresenter(TaskView view, TaskModel model) {
+    constructor(view, model) {
         this.view = view;
         this.model = model;
+
+        
+        this.updateView();
     }
 
-    public void addTask() {
-        String description = view.getNewTaskDescription();
-        model.addTask(description);
-        view.clearTaskInput();
-        updateView();
+    addTask(description) {
+        this.model.addTask(description);
+        this.updateView();
     }
 
-    public void removeTask(int index) {
-        model.removeTask(index);
-        updateView();
+    removeTask(index) {
+        this.model.removeTask(index);
+        this.updateView();
     }
 
-    public void toggleTask(int index) {
-        model.toggleTask(index);
-        updateView();
+    toggleTask(index) {
+        this.model.toggleTask(index);
+        this.updateView();
     }
 
-    public void updateView() {
-        view.showTasks(model.getTasks());
+    updateView() {
+        this.view.showTasks(this.model.getTasks());
     }
 }
+
+export default TaskPresenter;
