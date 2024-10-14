@@ -1,42 +1,39 @@
-import java.util.ArrayList;
-import java.util.List;
-
 class Task {
-    private String description;
-    private boolean completed;
-
-    public Task(String description) {
+    constructor(description) {
         this.description = description;
         this.completed = false;
     }
+}
 
-    public String getDescription() {
-        return description;
+class TaskModel {
+    constructor() {
+        this.tasks = [];
     }
 
-    public boolean isCompleted() {
-        return completed;
+    addTask(description) {
+        const newTask = new Task(description);
+        this.tasks.push(newTask);
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
+    removeTask(index) {
+        if (index >= 0 && index < this.tasks.length) {
+            this.tasks.splice(index, 1);
+        }
+    }
+
+    toggleTask(index) {
+        if (index >= 0 && index < this.tasks.length) {
+            this.tasks[index].completed = !this.tasks[index].completed;
+        }
+    }
+
+    getTasks() {
+        return this.tasks;
     }
 }
 
+export default TaskModel;
 
-class TaskModel {
-    private List<Task> tasks;
-
-    public TaskModel() {
-        tasks = new ArrayList<>();
-    }
-
-    public void addTask(String description) {
-        tasks.add(new Task(description));
-    }
-
-    public void removeTask(int index) {
-        if (index >= 0 && index < tasks.size()) {
             tasks.remove(index);
         }
     }
