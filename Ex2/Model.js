@@ -1,32 +1,54 @@
-type Task = {
-    id: number;
-    description: string;
-    completed: boolean;
-};
+import java.util.ArrayList;
+import java.util.List;
 
-class TaskModel {
-    private tasks: Task[] = [];
+class Task {
+    private String description;
+    private boolean completed;
 
-    addTask(description: string): Task {
-        const newTask: Task = { id: Date.now(), description, completed: false };
-        this.tasks.push(newTask);
-        return newTask;
+    public Task(String description) {
+        this.description = description;
+        this.completed = false;
     }
 
-    removeTask(taskId: number): void {
-        this.tasks = this.tasks.filter(task => task.id !== taskId);
+    public String getDescription() {
+        return description;
     }
 
-    toggleTask(taskId: number): void {
-        const task = this.tasks.find(task => task.id === taskId);
-        if (task) {
-            task.completed = !task.completed;
-        }
+    public boolean isCompleted() {
+        return completed;
     }
 
-    getTasks(): Task[] {
-        return this.tasks;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
 
-export default TaskModel;
+
+class TaskModel {
+    private List<Task> tasks;
+
+    public TaskModel() {
+        tasks = new ArrayList<>();
+    }
+
+    public void addTask(String description) {
+        tasks.add(new Task(description));
+    }
+
+    public void removeTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            tasks.remove(index);
+        }
+    }
+
+    public void toggleTask(int index) {
+        if (index >= 0 && index < tasks.size()) {
+            Task task = tasks.get(index);
+            task.setCompleted(!task.isCompleted());
+        }
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+}
