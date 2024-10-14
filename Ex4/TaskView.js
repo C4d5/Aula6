@@ -1,5 +1,3 @@
-// src/components/TaskView.js
-
 import React from 'react';
 import TaskItem from './TaskItem';
 
